@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script type="text/javascript" src="https://sdk.monnify.com/plugin/monnify.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donotion</title>
+    <link rel="icon" type="image/x-icon" href="icons\favi.ico">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/site.css">
+	<link rel="stylesheet" type="text/css" href="nucleo/css/nucleo.css">
+	<link rel="stylesheet" href="fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+	<style> </style>
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+    
+
+    <!-- donation_form.php -->
+    <div class="wrapper flex-grow-1">
+					<br>
+					<br>
+		<h2 class="text-center animate__animated animate__fadeInDown">Donate Now</h2>
+		<div class="container mb-5 animate__animated animate__fadeIn animate__delay-1s">
+		<hr>
+			<div class="">
+	
+				<form id="paymentForm" >
+					<div class="col-md-6">
+					<br>
+					
+						<div class="form-group row">
+							<label for="custumerName" class="col-sm-3 col-form-label">Custumer Name</label>
+							<div class="col-sm-9">
+								<input id="custumerName" type="text" class="form-control" autocomplete="off" name="custumerName" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="custumerEmail" class="col-sm-3 col-form-label">Custumer Email</label>
+							<div class="col-sm-9">
+								<input id="custumerEmail" type="text" class="form-control" autocomplete="off" name="custumerEmail" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="custumerPhone" class="col-sm-3 col-form-label">Custumer Phone</label>
+							<div class="col-sm-9">
+								<input id="custumerPhone" type="text" class="form-control" autocomplete="off" name="custumerPhone" required>
+							</div>
+						</div>
+										
+						<br>
+						<input type="submit" onclick="payWithMonnify()" id="donateBtn" class="btn btn-primary form-control btncmn" value="Pay With Monnify" name="donate">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script>
+	function payWithMonnify() {
+		//Get the data form
+		const custumerName = document.getElementById("custumerName").value;
+		const custumerEmail = document.getElementById("custumerEmail").value;
+		const custumerPhone = document.getElementById("custumerPhone").value;
+
+		//Grab unto the payload
+		MonnifySDK.initialize({
+			amount: 1000,
+			currency: "NGN",
+			reference: "CK_" + Math.floor((Math.random() * 1000000000) + 1),
+			custumerName: custumerName,
+			custumerEmail: custumerEmail,
+			custumerPhone: custumerPhone,
+			apiKey: "MK_TEST_H1ZLBS72RX",
+			contractCode: "1974085804",
+			paymentDescription: "Test Monnify",
+			isTestMode: true,
+			onComplete: function(response) {
+				//Implement What happens if payment completes
+				//console.log(response);
+				const paymentSuccessful = true;
+				if (paymentSuccessful){
+					window.location.href="file:///C:/xampp/htdocs/Sample/Charity-Management-Final-master/donation_form.html";
+				}
+			}
+
+		})
+	}
+</script>
+</body>
+</html>
